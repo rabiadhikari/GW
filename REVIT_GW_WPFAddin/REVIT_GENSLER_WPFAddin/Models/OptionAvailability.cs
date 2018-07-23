@@ -4,7 +4,7 @@ using Autodesk.Revit.UI.Selection;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace REVIT_GENSLER_WPFAddinTemplate1
+namespace REVIT_GW_WPFAddin
 {
     internal class OptionAvailability : IExternalCommandAvailability
     {

@@ -5,10 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Telerik.Windows.Controls;
-using REVIT_GENSLER_WPFAddinTemplate1.Models;
+using REVIT_GW_WPFAddin.Models;
 
-namespace REVIT_GENSLER_WPFAddinTemplate1.ViewModels
+namespace REVIT_GW_WPFAddin.ViewModels
 {
     public class App_ViewModel : ViewModelBase
     {

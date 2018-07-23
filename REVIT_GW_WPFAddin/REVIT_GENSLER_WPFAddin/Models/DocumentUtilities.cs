@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace REVIT_GENSLER_WPFAddinTemplate1
+namespace REVIT_GW_WPFAddin
 {
     public class DocumentUtils//Utility to get information from Revit
     {

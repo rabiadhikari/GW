@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace REVIT_GENSLER_WPFAddinTemplate1.Models
+namespace REVIT_GW_WPFAddin.Models
 {
     public class CheckCaseMethods
     {

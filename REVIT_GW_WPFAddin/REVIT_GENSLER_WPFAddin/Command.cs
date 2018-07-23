@@ -3,7 +3,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 
-namespace REVIT_GENSLER_WPFAddinTemplate1
+namespace REVIT_GW_WPFAddin
 {
     [Transaction(TransactionMode.Manual)]
     public class Command : IExternalCommand

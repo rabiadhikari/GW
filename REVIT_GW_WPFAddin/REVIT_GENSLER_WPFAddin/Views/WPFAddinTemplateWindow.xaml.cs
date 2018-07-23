@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 
-namespace REVIT_GENSLER_WPFAddinTemplate1.Views
+namespace REVIT_GW_WPFAddin.Views
 {
     public partial class GenslerWindow : Window
     {

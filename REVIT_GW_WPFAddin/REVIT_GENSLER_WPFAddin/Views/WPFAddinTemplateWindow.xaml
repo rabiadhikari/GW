@@ -6,7 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         x:Name="WPFAddinTemplateWindow"
-        x:Class="REVIT_GENSLER_WPFAddinTemplate1.Views.GenslerWindow"
+        x:Class="REVIT_GW_WPFAddin.Views.GenslerWindow"
         mc:Ignorable="d"
         Title="WPFAddinTemplateWindow"
         Height="500" MinHeight="500" Width="850" MinWidth="850"

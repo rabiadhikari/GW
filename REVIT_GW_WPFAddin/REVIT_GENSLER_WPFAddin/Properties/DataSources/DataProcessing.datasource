@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="DataProcessing" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>REVIT_GENSLER_WPFAddinTemplate1.DesignOptionsViews.DataProcessing, REVIT_GENSLER_WPFAddinTemplate1.DesignOptionsViews, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+   <TypeInfo>REVIT_GW_WPFAddin.DesignOptionsViews.DataProcessing, REVIT_GW_WPFAddin.DesignOptionsViews, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

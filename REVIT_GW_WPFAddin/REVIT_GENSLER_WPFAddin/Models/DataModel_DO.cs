@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Telerik.Windows.Controls;
 
-namespace REVIT_GENSLER_WPFAddinTemplate1.Models
+namespace REVIT_GW_WPFAddin.Models
 {
     #region Data Model - Data_OptionSet
 

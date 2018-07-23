@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace REVIT_GENSLER_WPFAddinTemplate1
+namespace REVIT_GW_WPFAddin
 {
     /// <summary>
     /// Helper class for sharing data across classes
