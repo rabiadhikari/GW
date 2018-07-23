@@ -1,0 +1,236 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        x:Name="WPFAddinTemplateWindow"
+        x:Class="REVIT_GENSLER_WPFAddinTemplate1.Views.GenslerWindow"
+        mc:Ignorable="d"
+        Title="WPFAddinTemplateWindow"
+        Height="500" MinHeight="500" Width="850" MinWidth="850"
+        Topmost="True" ShowInTaskbar="True"
+        Background="{DynamicResource GenslerRed}" ShowActivated="True"
+        Visibility="Visible" WindowStartupLocation="CenterScreen" Focusable="True"
+        WindowStyle="None"  WindowState="Normal"
+        MouseDown="Window_MouseDown">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="GenslerRed" Color="#ee3224" />
+    </Window.Resources>
+
+    <Grid Background="White" Margin="3,32,3,3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"
+                        MinWidth="306" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"
+                        MinWidth="520" />
+        </Grid.ColumnDefinitions>
+        <GroupBox x:Name="DesignOptions_GroupBoxes"
+              Header="Design Options"
+              Margin="10,10,0,29"
+              Grid.Column="0">
+            <Grid Width="Auto"
+            Margin="0,0,0,0">
+                <Label x:Name="OptionSet_Label"
+               Content="Pick Design Options"
+               HorizontalAlignment="Left"
+               Height="28"
+               Margin="10,10,0,0"
+               VerticalAlignment="Top"
+               Width="182" />
+                <TreeView x:Name="DesignOptions_tree"
+                  Margin="10,43,10,40"
+                  Background="#FFF0F0F0"
+                  ItemsSource="{Binding DesignOptionSetInRevit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  Padding="1">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="IsExpanded" Value="True" />
+                            <Setter Property="Focusable" Value="False" />
+                            <Setter Property="IsExpanded" Value="True" />
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeView.ItemTemplate>
+                        <!-- Design Option Set Template-->
+                        <HierarchicalDataTemplate ItemsSource="{Binding DesignOptionsInSet}">
+                            <StackPanel Orientation="Horizontal" IsEnabled="True">
+                                <CheckBox Content="{Binding Name, Mode=OneTime}"
+                          Focusable="False" IsEnabled="True"
+                          IsChecked="{Binding Selection, Mode=TwoWay}"
+                          Margin="0,4" VerticalAlignment="Center" IsThreeState="False">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding DataContext.Command_CheckTreeViewOptionSet, ElementName=DesignOptions_tree}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </CheckBox>
+                            </StackPanel>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <!-- Design Option Template-->
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" IsEnabled="True">
+                                        <CheckBox Content="{Binding Name, Mode=OneTime}"
+                                  Focusable="False"
+                                  IsChecked="{Binding Selection, Mode=TwoWay}"
+                                  Margin="0,4" VerticalAlignment="Center" IsThreeState="False">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.Command_CheckTreeViewDesignOptions, ElementName=DesignOptions_tree}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </CheckBox>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+                <Button x:Name="checkAll_btn"
+                Content="Check All"
+                HorizontalAlignment="Left"
+                Margin="10,0,0,10"
+                Width="75"
+                Height="24"
+                VerticalAlignment="Bottom"
+                Command="{Binding Command_CheckAllTreeViewItems}" />
+                <Button x:Name="checkNone_btn"
+                Content="Check None"
+                Margin="90,0,0,10"
+                Height="24"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Width="75"
+                Command="{Binding Command_UnCheckAllTreeViewItems}" />
+            </Grid>
+        </GroupBox>
+        <GridSplitter HorizontalAlignment="Center"
+                  VerticalAlignment="Stretch"
+                  Grid.Column="1"
+                  ResizeBehavior="PreviousAndNext"
+                  Width="10"
+                  Background="White" />
+        <GroupBox x:Name="CreateViews_GroupBoxes"
+              Header="View names &amp; Modifiers"
+              Margin="0,10,10,29"
+              Grid.Column="2">
+            <Grid Margin="0,0,0,0"
+            Width="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="6" MinWidth="6" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <Label x:Name="ViewNames_Label" Content="Proposed View Names"
+               Margin="10,10,10,0" Height="32" VerticalAlignment="Top" />
+                <ListView x:Name="ViewNames_Listbox"
+                  Margin="10,42,10,31"
+                  Grid.ColumnSpan="3"
+                  Grid.RowSpan="2"
+                  SelectionMode="Single"
+                  ToolTip="Edit the Viewname"
+                  ItemsSource="{Binding ProposedViewsList, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Focusable" Value="False" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <!--<ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local:Data_ProposedView}">
+                            <DockPanel x:Name="OneDockPanel"
+                         LastChildFill="True">
+                                <CheckBox x:Name="chkbox_Viewname" Width="24"
+                          VerticalAlignment="Center"
+                          IsChecked="{Binding Selection, Mode=TwoWay}"
+                          IsTabStop="False"
+                          IsEnabled="{Binding IsEnabled, Mode=TwoWay}" />
+                                <TextBox x:Name="tbox_inputTextBox"
+                                    Grid.IsSharedSizeScope="True"
+                         HorizontalContentAlignment="Stretch"
+                         AutoWordSelection="True"
+                         BorderBrush="Bisque"
+                         Focusable="True"
+                         InputMethod.IsInputMethodEnabled="True"
+                         IsTabStop="True"
+                         Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         TextAlignment="Left">
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter"
+                                Command="{Binding DataContext.Command_CheckViewNamesForDuplicates, ElementName=DesignOptions_tree}"
+                                CommandParameter="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" />
+                                    </TextBox.InputBindings>
+                                    <TextBox.Style>
+                                        <Style TargetType="{x:Type TextBox}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsEnabled, ElementName=chkbox_Viewname, Mode=OneWay}" Value="False">
+                                                    <Setter Property="Background" Value="LightGray" />
+                                                    <Setter Property="FontStyle" Value="Italic" />
+                                                    <Setter Property="Foreground" Value="Black" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>-->
+                </ListView>
+                <Button x:Name="cancel_btn"
+                Grid.Row="2"
+                Content="Cancel"
+                Margin="0,0,137,10"
+                Height="32"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Width="67"
+                IsCancel="True" BorderBrush="#FFEE3224" Grid.Column="2" OpacityMask="{DynamicResource GenslerRed}" />
+                <Button x:Name="create_btn"
+                Grid.Row="2"
+                Grid.Column="2"
+                Content="Create Views"
+                Margin="0,0,12,10"
+                Height="32"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Width="120"
+                Command="{Binding Command_CreateViews}" BorderBrush="{DynamicResource GenslerRed}" Foreground="{DynamicResource GenslerRed}" FontWeight="Bold" />
+                <Label x:Name="Status_Label"
+               Content="Status:"
+               Margin="10,0,180,54"
+               Grid.Row="1"
+               Grid.RowSpan="2"
+               Height="32"
+               VerticalAlignment="Bottom" />
+                <Label x:Name="StatusMessage_Label"
+               Content="{Binding Status_Message}"
+               Margin="56,0,10,54"
+               Grid.Row="1"
+               Grid.RowSpan="2"
+               Grid.ColumnSpan="3"
+               Height="32"
+               VerticalAlignment="Bottom"
+               Background="White" />
+            </Grid>
+        </GroupBox>
+        <Image Width="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-28,0,0" Source="/;component/Resources/WhiteG.ico" />
+        <TextBlock x:Name="textBlockTitle" x:FieldModifier="public" TextWrapping="Wrap" VerticalAlignment="Top" Height="20" FontSize="16" Text="View Options" Foreground="White" FontFamily="KievitOT" Margin="33,-26,0,0" HorizontalAlignment="Left" Width="223" />
+        <telerik:RadButton x:Name="button_Help" Content="?" ToolTip="Help" BorderBrush="{DynamicResource GenslerRed}" Focusable="False" Background="White" Foreground="{DynamicResource GenslerRed}" FontFamily="KievitOT"  Margin="0,-29,26,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Click="button_Help_Click" Grid.Column="2" />
+        <telerik:RadButton x:Name="button_Cancel" IsCancel="True" Content="X" ToolTip="Cancel Dialog" BorderBrush="{DynamicResource GenslerRed}" Focusable="False" Background="White" Foreground="{DynamicResource GenslerRed}" FontFamily="KievitOT"  Margin="0,-29,1,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Click="button_Cancel_Click" Grid.Column="2" />
+        <Grid x:Name="grid_Footer" Grid.ColumnSpan="3" Height="22" VerticalAlignment="Bottom" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}" />
+        <Image x:Name="StudioLogo" x:FieldModifier="public" HorizontalAlignment="Left" Width="120" Height="22" VerticalAlignment="Bottom" Source="Resources/FWDT_LogoTrans.png" Margin="10,0,0,3" />
+        <Image x:Name="resize" x:FieldModifier="public" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Bottom" Source="Resources/resize-handle.png" Margin="0,0,2,2" Grid.Column="2" />
+        <Label x:Name="label_version" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="130,433,0,-2" Foreground="Gray" />
+    </Grid>
+</Window>

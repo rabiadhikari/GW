@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command Gensler.DesignOptionsViews</Text>
+    <Description>Some description for Gensler.DesignOptionsViews</Description>
+    <Assembly>Gensler.DesignOptionsViews.dll</Assembly>
+    <FullClassName>Gensler.DesignOptionsViews.Command</FullClassName>
+    <ClientId>bbbdb8a6-05c3-4698-81e2-820600085018</ClientId>
+    <VendorId>GENSLER</VendorId>
+    <VendorDescription>Gensler, www.gensler.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application Gensler.DesignOptionsViews</Name>
+    <Assembly>Gensler.DesignOptionsViews.dll</Assembly>
+    <FullClassName>Gensler.DesignOptionsViews.App</FullClassName>
+    <ClientId>2a25c05c-78d8-4cf9-b9ce-fc8347e3bd36</ClientId>
+    <VendorId>GENSLER</VendorId>
+    <VendorDescription>Gensler, www.gensler.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
